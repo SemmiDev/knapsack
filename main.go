@@ -78,11 +78,17 @@ func (s *Server) solveHandler(c *fiber.Ctx) error {
 	// menghitung knapsack berdasarkan profit menggunakan greedy
 	totalWeightGreedy, totalProfitGreedy, itemsGreedy := greedyKnapsackByProfit(capacity, randWeights, randProfits)
 
+	// setiap index item ditambah 1
+	itemsGreedy = toNo(itemsGreedy)
+
 	// menghitung knapsack berdasarkan profit menggunakan dynamic programming
 	totalProfitDP, _, itemsDP := dpKnapsackByProfit(capacity, randWeights, randProfits)
 
 	// menghitung total weight untuk dynamic programming
 	totalWeightDP := totalWeightDP(randWeights, itemsDP)
+
+	// setiap index item ditambah 1
+	itemsDP = toNo(itemsDP)
 
 	// render file solve.html, kemudian sisipkan data untuk dikirim ke view solve.html
 	return c.Render("solve", fiber.Map{
@@ -97,6 +103,14 @@ func (s *Server) solveHandler(c *fiber.Ctx) error {
 		"TotalProfitDP": totalProfitDP,
 		"ItemsDP":       itemsDP,
 	})
+}
+
+// toNo menambahkan setiap item dengan 1
+func toNo(itemsGreedy []int) (result []int) {
+	for _, v := range itemsGreedy {
+		result = append(result, v+1)
+	}
+	return
 }
 
 // dpKnapsackByProfit solve knapsack problem menggunakan dynamic programming
@@ -152,7 +166,7 @@ func wpToData(w []int, p []int) (wp []Data) {
 	for i, v := range w {
 		wp = append(wp,
 			Data{
-				No:     i,
+				No:     i + 1,
 				Weight: v,
 				Profit: p[i],
 			})
