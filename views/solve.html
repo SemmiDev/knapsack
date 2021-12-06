@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Solved</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css?family=Amarante");
+      html,
+      body,
+      div,
+      span,
+      applet,
+      object,
+      iframe,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      blockquote,
+      pre,
+      a,
+      abbr,
+      acronym,
+      address,
+      big,
+      cite,
+      code,
+      del,
+      dfn,
+      em,
+      img,
+      ins,
+      kbd,
+      q,
+      s,
+      samp,
+      small,
+      strike,
+      strong,
+      sub,
+      sup,
+      tt,
+      var,
+      b,
+      u,
+      i,
+      center,
+      dl,
+      dt,
+      dd,
+      ol,
+      ul,
+      li,
+      fieldset,
+      form,
+      label,
+      legend,
+      table,
+      caption,
+      tbody,
+      tfoot,
+      thead,
+      tr,
+      th,
+      td,
+      article,
+      aside,
+      canvas,
+      details,
+      embed,
+      figure,
+      figcaption,
+      footer,
+      header,
+      hgroup,
+      menu,
+      nav,
+      output,
+      ruby,
+      section,
+      summary,
+      time,
+      mark,
+      audio,
+      video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+        outline: none;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+      html {
+        overflow-y: scroll;
+      }
+      body {
+        background: #eee url("https://i.imgur.com/eeQeRmk.png"); /* https://subtlepatterns.com/weave/ */
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 62.5%;
+        line-height: 1;
+        color: linear-gradient(#141e30, #243b55);
+        padding: 22px 10px;
+        padding-bottom: 55px;
+      }
+      ::selection {
+        background: #5f74a0;
+        color: #fff;
+      }
+      ::-moz-selection {
+        background: #5f74a0;
+        color: #fff;
+      }
+      ::-webkit-selection {
+        background: #5f74a0;
+        color: #fff;
+      }
+      br {
+        display: block;
+        line-height: 1.6em;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      input,
+      textarea {
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        outline: none;
+      }
+      blockquote,
+      q {
+        quotes: none;
+      }
+      blockquote:before,
+      blockquote:after,
+      q:before,
+      q:after {
+        content: "";
+        content: none;
+      }
+      strong,
+      b {
+        font-weight: bold;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      img {
+        border: 0;
+        max-width: 100%;
+      }
+      h1 {
+        font-family: "Amarante", Tahoma, sans-serif;
+        font-weight: bold;
+        font-size: 3.6em;
+        line-height: 1.7em;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      /** page structure **/
+      #wrapper {
+        display: block;
+        width: 850px;
+        background: #fff;
+        margin: 0 auto;
+        padding: 10px 17px;
+        -webkit-box-shadow: 2px 2px 3px -1px rgba(0, 0, 0, 0.35);
+      }
+      #keywords {
+        margin: 0 auto;
+        font-size: 1.2em;
+        margin-bottom: 15px;
+      }
+      #keywords thead {
+        cursor: pointer;
+        background: #c8d7ca;
+      }
+      #keywords thead tr th {
+        font-weight: bold;
+        padding: 12px 30px;
+        padding-left: 42px;
+      }
+      #keywords thead tr th span {
+        padding-right: 20px;
+        background-repeat: no-repeat;
+        background-position: 100% 100%;
+      }
+      #keywords thead tr th.headerSortUp,
+      #keywords thead tr th.headerSortDown {
+        background: #acc8dd;
+      }
+      #keywords thead tr th.headerSortUp span {
+        background-image: url("https://i.imgur.com/SP99ZPJ.png");
+      }
+      #keywords thead tr th.headerSortDown span {
+        background-image: url("https://i.imgur.com/RkA9MBo.png");
+      }
+      #keywords tbody tr {
+        color: #555;
+      }
+      #keywords tbody tr td {
+        text-align: center;
+        padding: 15px 10px;
+      }
+      #keywords tbody tr td.lalign {
+        text-align: left;
+      }
+      .glow-on-hover {
+        width: 70px;
+        height: 30px;
+        border: none;
+        outline: none;
+        color: #fff;
+        background: #111;
+        cursor: pointer;
+        position: relative;
+        z-index: 0;
+        border-radius: 25px;
+      }
+
+      .glow-on-hover:before {
+        content: "";
+        background: linear-gradient(
+          45deg,
+          #ff0000,
+          #ff7300,
+          #fffb00,
+          #48ff00,
+          #00ffd5,
+          #002bff,
+          #7a00ff,
+          #ff00c8,
+          #ff0000
+        );
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        background-size: 400%;
+        z-index: -1;
+        filter: blur(5px);
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        animation: glowing 20s linear infinite;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        border-radius: 20px;
+      }
+
+      .glow-on-hover:active {
+        color: #000;
+      }
+
+      .glow-on-hover:active:after {
+        background: transparent;
+      }
+
+      .glow-on-hover:hover:before {
+        opacity: 1;
+      }
+
+      .glow-on-hover:after {
+        z-index: -1;
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #111;
+        left: 0;
+        top: 0;
+        border-radius: 10px;
+      }
+
+      @keyframes glowing {
+        0% {
+          background-position: 0 0;
+        }
+        50% {
+          background-position: 400% 0;
+        }
+        100% {
+          background-position: 0 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <!-- button untuk kembali ke halaman awal -->
+      <a href="/"><button class="glow-on-hover" type="button">Back</button></a>
+      <br />
+      <br />
+      <h1>Data</h1>
+      <table id="keywords" cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <th><span>No</span></th>
+            <th><span>Weight</span></th>
+            <th><span>Profit</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- loop data no, weight, dan profit untuk ditampikan kedalam baris & kolom table -->
+          {{range .Data}}
+          <tr>
+            <td>{{.No}}</td>
+            <td>{{.Weight}} kg</td>
+            <td>$ {{.Profit}}</td>
+          </tr>
+          {{ end }}
+        </tbody>
+      </table>
+
+      <br />
+      <br />
+
+      <h1>Hasil</h1>
+      <table id="keywords" cellspacing="0" cellpadding="0">
+        <tbody>
+          <tr style="text-align: left">
+            <!-- menampilkan kapasitas knapsack -->
+            <td>Kapasitas Knapsack</td>
+            <td><b>{{.KapasitasKnapsack}}</b></td>
+          </tr>
+          <tr>
+            <!-- menampilkan total weight untuk greedy -->
+            <td>Total Weight Greedy</td>
+            <td><b>{{.TotalWeightGreedy}}</b></td>
+          </tr>
+          <tr>
+            <td>Total Profit Greedy</td>
+            <!-- menampilkan total profit untuk greedy -->
+            <td><b>{{.TotalProfitGreedy}}</b></td>
+          </tr>
+          <tr>
+            <!-- menampilkan index dari item-item greedy -->
+            <td>Items Greedy</td>
+            <td><b>
+                  {{range $i, $e := .ItemsGreedy}}
+                     {{$e}}
+                  {{end}}
+               </b>
+              </td>
+            </tr>
+            <tr>
+            <!-- menampilkan waktu dari greedy -->
+            <td>Total Waktu Greedy</td>
+            <td><b>{{.TimeGreedy}} ms</b></td>
+          </tr>
+          <tr>
+            <!-- menampilkan total weight dari dynamic programming -->
+            <td>Total Weight DP</td>
+            <td><b>{{.TotalWeightDP}}</b></td>
+          </tr>
+          <tr>
+            <!-- menampilkan total profit dari dynamic programming -->
+            <td>Total Profit DP</td>
+            <td><b>{{.TotalProfitDP}}</b></td>
+          </tr>
+          <tr>
+            <!-- menampilkan index dari item-item dynamic programming -->
+            <td>Items DP</td>
+            <td><b>
+              {{range $i, $e := .ItemsDP}}
+                  {{$e}}
+               {{end}}
+              </b>
+            </td>
+          </tr>
+          <tr>
+            <!-- menampilkan total waktu dari dynamic programming -->
+            <td>Total Waktu DP</td>
+            <td><b>{{.TimeDP}} ms</b></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
