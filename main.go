@@ -5,6 +5,7 @@ import (
 	"math/rand"
 	"sort"
 	"strconv"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/template/html"
@@ -74,23 +75,11 @@ func (s *Server) solveHandler(c *fiber.Ctx) error {
 	// agar bisa dipanggil di file solve.html
 	data := wpToData(randWeights, randProfits)
 
-	// init waktu greedy
-	// greedyTime := time.Now()
-
 	// menghitung knapsack berdasarkan profit menggunakan greedy
 	totalWeightGreedy, totalProfitGreedy, itemsGreedy := greedyKnapsackByProfit(capacity, randWeights, randProfits)
 
-	// hitung waktu yang dihabiskan untuk menghitung knapsack problem menggunakan greedy
-	// greedyTimeElapsed := time.Since(greedyTime).Milliseconds()
-
-	// init waktu dynamic programming
-	// dpTime := time.Now()
-
 	// menghitung knapsack berdasarkan profit menggunakan dynamic programming
 	totalProfitDP, _, itemsDP := dpKnapsackByProfit(capacity, randWeights, randProfits)
-
-	// hitung waktu yang dihabiskan untuk menghitung knapsack problem menggunakan dynamic programming
-	// dpTimeElapsed := time.Since(dpTime).Milliseconds()
 
 	// menghitung total weight untuk dynamic programming
 	totalWeightDP := totalWeightDP(randWeights, itemsDP)
