@@ -1,1 +1,1 @@
-web: bin/knapsack-app-dp
+web: knapsack-app-dp
