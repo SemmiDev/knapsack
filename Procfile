@@ -1,1 +1,1 @@
-web: bin/knapsackapp
+web: app
