@@ -3,12 +3,14 @@ package main
 import (
 	"log"
 	"math/rand"
+	"os"
 	"sort"
 	"strconv"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/template/html"
+	"github.com/joho/godotenv"
 )
 
 // Data terdiri atas field No, Weight, dan Profit bertipe int
@@ -45,6 +47,17 @@ func newServer() *Server {
 }
 
 func main() {
+	// load env
+	err := godotenv.Load()
+	if err != nil {
+		log.Println("Error loading .env file")
+	}
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3000"
+	}
+
 	// create instance server
 	app := newServer()
 
@@ -52,7 +65,7 @@ func main() {
 	app.setupRoutes()
 
 	// jalankan aplikasi di localhost:8080
-	app.run(":8080")
+	app.run(":" + port)
 }
 
 // homeHandler nge-render file index.html ke browser
