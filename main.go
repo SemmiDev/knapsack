@@ -35,10 +35,10 @@ func (s *Server) setupRoutes() {
 }
 
 // newServer untuk create instance Server
-func newServer(viewFolder, format string) *Server {
+func newServer() *Server {
 	// load folder file html didalam folder views untuk templating engine (html)
 	config := fiber.Config{
-		Views: html.New(viewFolder, format),
+		Views: html.New("./views", ".html"),
 	}
 	s := Server{fiber.New(config)}
 	return &s
@@ -46,13 +46,13 @@ func newServer(viewFolder, format string) *Server {
 
 func main() {
 	// create instance server
-	app := newServer("./views", ".html")
+	app := newServer()
 
 	// setup routes
 	app.setupRoutes()
 
 	// jalankan aplikasi di localhost:9090
-	app.run(":9090")
+	app.run(":8080")
 }
 
 // homeHandler nge-render file index.html ke browser
