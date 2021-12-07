@@ -51,7 +51,7 @@ func main() {
 	// setup routes
 	app.setupRoutes()
 
-	// jalankan aplikasi di localhost:9090
+	// jalankan aplikasi di localhost:8080
 	app.run(":8080")
 }
 
